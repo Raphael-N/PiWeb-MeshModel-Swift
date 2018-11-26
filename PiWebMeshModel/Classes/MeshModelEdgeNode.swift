@@ -10,6 +10,8 @@ class MeshModelEdgeNode: SCNNode {
     private let edgeColor = UIColor.black
     private let maximumPointsPerNode = 20000
     
+    static var supportsSecureCoding: Bool = true
+    
     convenience init(edges: [MeshModelEdge]) {
         self.init()
         generateEdgeNodes(edges: edges)

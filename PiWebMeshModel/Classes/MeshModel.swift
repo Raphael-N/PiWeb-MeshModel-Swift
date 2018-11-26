@@ -14,6 +14,8 @@ public class MeshModel: SCNNode {
     private let edgeNode = SCNNode()
 
     public var metadata: MeshModelMetadata?
+    
+    static var supportsSecureCoding: Bool = true
 
     public convenience init?(data: Data) {
         self.init()

@@ -9,6 +9,8 @@ import SceneKit
 class MeshModelMeshNode: SCNNode {
     private let maximumPointsPerNode = 50000
     
+    static var supportsSecureCoding: Bool = true
+    
     convenience init(meshes: [MeshModelMesh]) {
         self.init()
         
@@ -29,7 +31,7 @@ class MeshModelMeshNode: SCNNode {
         }
         
         if !nodes.childNodes.isEmpty {
-            self.addChildNode(nodes.flattenedClone())
+            self.addChildNode(nodes)
         }
     }
     
