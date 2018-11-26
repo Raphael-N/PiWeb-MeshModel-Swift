@@ -9,7 +9,9 @@ import SceneKit
 class MeshModelMeshNode: SCNNode {
     private let maximumPointsPerNode = 50000
     
-    static var supportsSecureCoding: Bool = true
+    override static public var supportsSecureCoding: Bool {
+        return true
+    }
     
     convenience init(meshes: [MeshModelMesh]) {
         self.init()

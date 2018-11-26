@@ -15,7 +15,9 @@ public class MeshModel: SCNNode {
 
     public var metadata: MeshModelMetadata?
     
-    static var supportsSecureCoding: Bool = true
+    override static public var supportsSecureCoding: Bool {
+        return true
+    }
 
     public convenience init?(data: Data) {
         self.init()
