@@ -10,8 +10,8 @@ import objective_zip
 import os.log
 
 public class MeshModel: SCNNode {
-    private let meshNode = SCNNode()
-    private let edgeNode = SCNNode()
+    public let meshNode = SCNNode()
+    public let edgeNode = SCNNode()
 
     public var metadata: MeshModelMetadata?
     
