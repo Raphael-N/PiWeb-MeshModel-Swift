@@ -8,6 +8,7 @@ import SceneKit
 
 class MeshModelMeshNode: SCNNode {
     private let maximumPointsPerNode = 50000
+    private let material = SCNMaterial()
     
     override static public var supportsSecureCoding: Bool {
         return true
@@ -18,7 +19,11 @@ class MeshModelMeshNode: SCNNode {
         
         let nodes = SCNNode()
         var positionCount = 0
-        
+        guard let color = meshes.first?.color else {
+            return
+        }
+        material.isDoubleSided = true
+        material.diffuse.contents = UIColor(red: CGFloat(color.x), green: CGFloat(color.y), blue: CGFloat(color.z), alpha: CGFloat(color.w))
         for mesh in meshes {
             if positionCount + mesh.positions.count > maximumPointsPerNode {
                 
@@ -33,7 +38,7 @@ class MeshModelMeshNode: SCNNode {
         }
         
         if !nodes.childNodes.isEmpty {
-            self.addChildNode(nodes)
+            self.addChildNode(nodes.flattenedClone())
         }
     }
     
@@ -54,11 +59,8 @@ class MeshModelMeshNode: SCNNode {
             primitiveCount: indizes.count / 3,
             bytesPerIndex: MemoryLayout<Int32>.size)
         
-        let color = mesh.color
-        
         let geo = SCNGeometry(sources: [positionSource, normalSource], elements: [element])
-        geo.firstMaterial?.isDoubleSided = true
-        geo.firstMaterial?.diffuse.contents = UIColor(red: CGFloat(color.x), green: CGFloat(color.y), blue: CGFloat(color.z), alpha: CGFloat(color.w))
+        geo.materials = [material]
         
         return SCNNode(geometry: geo)
     }
